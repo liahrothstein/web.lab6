@@ -10,7 +10,7 @@ export default defineConfig([
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     plugins: { js, 'simple-import-sort': simpleImportSort },
-    extends: ['js/recommended', 'plugin:react/jsx-runtime'],
+    extends: ['js/recommended'],
     languageOptions: { globals: globals.browser },
     rules: {
       'simple-import-sort/imports': 'error',
