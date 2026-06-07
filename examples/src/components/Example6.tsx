@@ -6,7 +6,7 @@ export function Example6() {
   // Стейт для хранения результата вывода строки на экран
   const [resultMessage, setResultMessage] = useState<string>('');
 
-  const handleCalculateFactorial = (): void => {
+  function handleCalculateFactorial(): void {
     let n: number = parseInt(inputValue, 10);
 
     // Валидация: если введено не число
@@ -35,7 +35,7 @@ export function Example6() {
 
     // Формируем результирующую строку (аналог document.write)
     setResultMessage(`Факториал ${buf}! равен ${factorial}`);
-  };
+  }
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '450px' }}>
