@@ -1,7 +1,16 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Example1, Example2, Example3, Example4, Example5, Example6, Example7 } from './components';
+import {
+  Example1,
+  Example2,
+  Example3,
+  Example4,
+  Example5,
+  Example6,
+  Example7,
+  Example8,
+} from './components';
 import { MainRoute } from './MainRoute';
 
 function App() {
@@ -16,6 +25,7 @@ function App() {
       <Route path="/examples/xmpl5" element={<Example5 />} />
       <Route path="/examples/xmpl6" element={<Example6 />} />
       <Route path="/examples/xmpl7" element={<Example7 />} />
+      <Route path="/examples/xmpl8" element={<Example8 />} />
     </Routes>
   );
 }
