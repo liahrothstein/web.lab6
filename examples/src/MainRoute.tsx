@@ -12,6 +12,7 @@ export function MainRoute() {
       <Link to="/examples/xmpl6">Example 6</Link>
       <Link to="/examples/xmpl7">Example 7</Link>
       <Link to="/examples/xmpl8">Example 8</Link>
+      <Link to="/examples/xmpl9">Example 9</Link>
     </div>
   );
 }
