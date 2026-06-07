@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Example1, Example2, Example3, Example4, Example5 } from './components';
+import { Example1, Example2, Example3, Example4, Example5, Example6 } from './components';
 import { MainRoute } from './MainRoute';
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
       <Route path="/examples/xmpl3" element={<Example3 />} />
       <Route path="/examples/xmpl4" element={<Example4 />} />
       <Route path="/examples/xmpl5" element={<Example5 />} />
+      <Route path="/examples/xmpl6" element={<Example6 />} />
     </Routes>
   );
 }
