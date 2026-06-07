@@ -11,6 +11,7 @@ import {
   Example7,
   Example8,
   Example9,
+  Example10,
 } from './components';
 import { MainRoute } from './MainRoute';
 
@@ -28,6 +29,7 @@ function App() {
       <Route path="/examples/xmpl7" element={<Example7 />} />
       <Route path="/examples/xmpl8" element={<Example8 />} />
       <Route path="/examples/xmpl9" element={<Example9 />} />
+      <Route path="/examples/xmpl10" element={<Example10 />} />
     </Routes>
   );
 }
