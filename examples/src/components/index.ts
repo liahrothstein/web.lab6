@@ -2,3 +2,4 @@ export { Example1 } from './Example1';
 export { Example2 } from './Example2';
 export { Example3 } from './Example3';
 export { Example4 } from './Example4';
+export { Example5 } from './Example5';
