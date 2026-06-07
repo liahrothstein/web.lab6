@@ -9,3 +9,4 @@ export { Example8 } from './Example8';
 export { Example9 } from './Example9';
 export { Example10 } from './Example10';
 export { Example11 } from './Example11';
+export { Example12 } from './Example12';
