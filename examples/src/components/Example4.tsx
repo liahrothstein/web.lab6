@@ -1,90 +1,39 @@
 import React, { useState } from 'react';
 
+import {
+  calculate,
+  handleConcatStrings,
+  handleLinkClick,
+  handleLogic,
+  postDecrement,
+  postIncrement,
+  step1,
+  step2,
+  step3,
+  step4,
+  step5,
+  step6,
+  unaryMinus,
+} from '../utils/example4';
+
 export function Example4() {
-  // ==========================================
-  // БЛОК 1: Арифметические операторы (Имитация вычислений)
-  // ==========================================
-  const a1 = 100,
-    b1 = 10;
-  const step1 = a1 + b1; // 110
-  const step2 = step1 - b1; // 100
-  const step3 = step2 * b1; // 1000
-  const step4 = step3 / b1; // 100
-
-  const a2 = 9,
-    b2 = 7;
-  const step5 = a2 % b2; // 2
-  const step6 = (2 * 7) / 2 + 7 - (2 % 7); // Выражение: 2*7/2 + 7 - 2 = 7 + 7 - 2 = 12
-
-  // Логика инкремента/декремента (постфикс/префикс)
-  let calcA = 12;
-  const postIncrement = calcA++; // Вернет 12, calcA станет 13
-  const postDecrement = calcA--; // Вернет 13, calcA станет 12
-  const unaryMinus = -calcA; // -12
-
-  // ==========================================
-  // БЛОК 2: Счетчик кликов по ссылке (State)
-  // ==========================================
+  // Счетчик кликов по ссылке (State)
   const [clickCount, setClickCount] = useState<number>(0);
 
-  function handleLinkClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
-    // Имитируем префиксный инкремент ++sum (сначала увеличиваем, потом выводим)
-    const newCount = clickCount + 1;
-    setClickCount(newCount);
-    alert(`Вы нажали ${newCount} раз`);
-  }
-
-  // ==========================================
-  // БЛОК 3: Калькулятор (Числа)
-  // ==========================================
+  // Калькулятор (Числа)
   const [num1, setNum1] = useState<string>('30');
   const [num2, setNum2] = useState<string>('4');
   const [mathResult, setMathResult] = useState<number | string>('');
 
-  const calculate = (operator: '+' | '-' | '*' | '/') => {
-    const parsed1 = parseInt(num1, 10) || 0;
-    const parsed2 = parseInt(num2, 10) || 0;
-
-    switch (operator) {
-      case '+':
-        setMathResult(parsed1 + parsed2);
-        break;
-      case '-':
-        setMathResult(parsed1 - parsed2);
-        break;
-      case '*':
-        setMathResult(parsed1 * parsed2);
-        break;
-      case '/':
-        setMathResult(parsed2 !== 0 ? parsed1 / parsed2 : 'Ошибка (деление на 0)');
-        break;
-    }
-  };
-
-  // ==========================================
-  // БЛОК 4: Конкатенация строк
-  // ==========================================
+  // Конкатенация строк
   const [str1, setStr1] = useState<string>('Java');
   const [str2, setStr2] = useState<string>('Script');
   const [strResult, setStrResult] = useState<string>('');
 
-  const handleConcatStrings = () => {
-    setStrResult(str1 + str2);
-  };
-
-  // ==========================================
-  // БЛОК 5: Логические операторы
-  // ==========================================
+  // Логические операторы
   const [bool1, setBool1] = useState<boolean>(true);
   const [bool2, setBool2] = useState<boolean>(false);
   const [logicResult, setLogicResult] = useState<string>('');
-
-  const handleLogic = (operation: 'AND' | 'OR' | 'NOT') => {
-    if (operation === 'AND') setLogicResult(bool1 && bool2 ? 'true' : 'false');
-    if (operation === 'OR') setLogicResult(bool1 || bool2 ? 'true' : 'false');
-    if (operation === 'NOT') setLogicResult(!bool1 ? 'true' : 'false'); // Спецификация: только для 1-го элемента
-  };
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
@@ -111,7 +60,7 @@ export function Example4() {
 
       {/* Ссылка-счетчик */}
       <section style={{ margin: '20px 0' }}>
-        <a href="#" onClick={handleLinkClick}>
+        <a href="#" onClick={(e) => handleLinkClick(e, clickCount, setClickCount)}>
           Сколько раз нажата ссылка?
         </a>
         <span style={{ marginLeft: '10px', color: '#666' }}>(Нажато: {clickCount})</span>
@@ -139,14 +88,23 @@ export function Example4() {
           Результат: <input type="text" size={6} readOnly value={mathResult} />
         </label>
         <div style={{ marginTop: '10px' }}>
-          <button onClick={() => calculate('+')}>Сложить</button>
-          <button onClick={() => calculate('-')} style={{ marginLeft: '5px' }}>
+          <button onClick={() => calculate('+', setMathResult, num1, num2)}>Сложить</button>
+          <button
+            onClick={() => calculate('-', setMathResult, num1, num2)}
+            style={{ marginLeft: '5px' }}
+          >
             Вычесть
           </button>
-          <button onClick={() => calculate('*')} style={{ marginLeft: '5px' }}>
+          <button
+            onClick={() => calculate('*', setMathResult, num1, num2)}
+            style={{ marginLeft: '5px' }}
+          >
             Умножить
           </button>
-          <button onClick={() => calculate('/')} style={{ marginLeft: '5px' }}>
+          <button
+            onClick={() => calculate('/', setMathResult, num1, num2)}
+            style={{ marginLeft: '5px' }}
+          >
             Разделить
           </button>
         </div>
@@ -180,7 +138,10 @@ export function Example4() {
           Результат: <input type="text" readOnly value={strResult} style={{ marginTop: '5px' }} />
         </label>
         <br />
-        <button onClick={handleConcatStrings} style={{ marginTop: '10px' }}>
+        <button
+          onClick={() => handleConcatStrings(setStrResult, str1, str2)}
+          style={{ marginTop: '10px' }}
+        >
           Склеить строки
         </button>
       </section>
@@ -210,11 +171,17 @@ export function Example4() {
         </label>
 
         <div style={{ marginTop: '10px' }}>
-          <button onClick={() => handleLogic('AND')}>И &&</button>
-          <button onClick={() => handleLogic('OR')} style={{ marginLeft: '5px' }}>
+          <button onClick={() => handleLogic('AND', setLogicResult, bool1, bool2)}>И &&</button>
+          <button
+            onClick={() => handleLogic('OR', setLogicResult, bool1, bool2)}
+            style={{ marginLeft: '5px' }}
+          >
             ИЛИ ||
           </button>
-          <button onClick={() => handleLogic('NOT')} style={{ marginLeft: '5px' }}>
+          <button
+            onClick={() => handleLogic('NOT', setLogicResult, bool1, bool2)}
+            style={{ marginLeft: '5px' }}
+          >
             НЕ !
           </button>
         </div>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { handleCalculatePower } from '../utils/example7';
+
 export function Example7() {
   // Инициализируем стейты дефолтными значениями из оригинального примера: n = 2, grade = 3
   const [baseInput, setBaseInput] = useState<string>('2');
@@ -10,47 +12,6 @@ export function Example7() {
   const [displayPower, setDisplayPower] = useState<number | null>(null);
   const [result, setResult] = useState<number | null>(null);
   const [error, setError] = useState<string>('');
-
-  function handleCalculatePower(): void {
-    setError('');
-
-    const n: number = parseInt(baseInput, 10);
-    let grade: number = parseInt(powerInput, 10);
-
-    // Валидация входных данных
-    if (isNaN(n) || !Number.isInteger(n) || isNaN(grade) || !Number.isInteger(grade)) {
-      setError('Пожалуйста, введите корректные целые числа.');
-      return;
-    }
-
-    // Сохраняем исходные значения для вывода на экран (аналог var buf = grade)
-    const originalBase = n;
-    const originalPower = grade;
-
-    let calculationResult = 1;
-
-    if (n === 0) {
-      calculationResult = 0;
-    } else if (n !== 0 && grade === 0) {
-      calculationResult = 1;
-    } else {
-      // Если степень отрицательная, превращаем её в положительную (как в оригинальном скрипте)
-      if (grade < 0) {
-        grade *= -1;
-      }
-
-      // Вычисление степени с помощью цикла while
-      while (grade > 0) {
-        calculationResult *= n;
-        grade--;
-      }
-    }
-
-    // Обновляем стейты отображения результатов
-    setDisplayBase(originalBase);
-    setDisplayPower(originalPower);
-    setResult(calculationResult);
-  }
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '450px' }}>
@@ -87,7 +48,16 @@ export function Example7() {
         </div>
 
         <button
-          onClick={handleCalculatePower}
+          onClick={() =>
+            handleCalculatePower(
+              setError,
+              setDisplayBase,
+              setDisplayPower,
+              setResult,
+              baseInput,
+              powerInput,
+            )
+          }
           style={{ padding: '6px 12px', cursor: 'pointer', marginTop: '5px', width: 'fit-content' }}
         >
           Возвести в степень

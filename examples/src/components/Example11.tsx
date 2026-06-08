@@ -1,30 +1,15 @@
 import React, { useState } from 'react';
 
+import { handleCalculate } from '../utils/example11';
+
 export function Example11() {
-  // Инициализируем состояния для сторон "a", "b" и результата "s"
-  // Храним как строки, чтобы пользователю было удобно стирать и вводить цифры в инпут
+  /* 
+    Инициализируем состояния для сторон "a", "b" и результата "s"
+    Храним как строки, чтобы пользователю было удобно стирать и вводить цифры в инпут
+  */
   const [sideA, setSideA] = useState<string>('1');
   const [sideB, setSideB] = useState<string>('1');
   const [area, setArea] = useState<string>('');
-
-  // Функция вычисления площади (аналог функции square из исходного текста)
-  function calculateSquare(a: string, b: string): number {
-    const parsedA = parseFloat(a);
-    const parsedB = parseFloat(b);
-
-    // Простая валидация: если введены не числа, возвращаем 0
-    if (isNaN(parsedA) || !parsedB) return 0;
-
-    return parsedA * parsedB;
-  }
-
-  // Обработчик клика по кнопке «Вычислить»
-  function handleCalculate(e: React.MouseEvent<HTMLInputElement>) {
-    e.preventDefault();
-
-    const result = calculateSquare(sideA, sideB);
-    setArea(result.toString()); // Записываем результат в стейт площади
-  }
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
@@ -72,7 +57,11 @@ export function Example11() {
         </div>
         <br />
 
-        <input type="button" value="Вычислить" onClick={handleCalculate} />
+        <input
+          type="button"
+          value="Вычислить"
+          onClick={(e) => handleCalculate(e, setArea, sideA, sideB)}
+        />
       </form>
     </div>
   );

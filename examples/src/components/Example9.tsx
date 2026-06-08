@@ -1,60 +1,11 @@
 import React, { useState } from 'react';
 
+import { handleMonthChange } from '../utils/example9';
+
 export function Example9() {
   // Инициализируем значением '12' (Декабрь)
   const [selectedMonth, setSelectedMonth] = useState<string>('12');
   const [monthName, setMonthName] = useState<string>('Декабрь');
-
-  function handleMonthChange(e: React.ChangeEvent<HTMLSelectElement>): void {
-    const value = e.target.value;
-    setSelectedMonth(value);
-
-    const n: number = parseInt(value, 10);
-
-    let result: string;
-    switch (n) {
-      case 1:
-        result = 'Январь';
-        break;
-      case 2:
-        result = 'Февраль';
-        break;
-      case 3:
-        result = 'Март';
-        break;
-      case 4:
-        result = 'Апрель';
-        break;
-      case 5:
-        result = 'Май';
-        break;
-      case 6:
-        result = 'Июнь';
-        break;
-      case 7:
-        result = 'Июль';
-        break;
-      case 8:
-        result = 'Август';
-        break;
-      case 9:
-        result = 'Сентябрь';
-        break;
-      case 10:
-        result = 'Октябрь';
-        break;
-      case 11:
-        result = 'Ноябрь';
-        break;
-      case 12:
-        result = 'Декабрь';
-        break;
-      default:
-        result = 'Месяц не определен';
-    }
-
-    setMonthName(result);
-  }
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '400px' }}>
@@ -71,7 +22,7 @@ export function Example9() {
         <select
           id="month-select"
           value={selectedMonth}
-          onChange={handleMonthChange}
+          onChange={(e) => handleMonthChange(e, setSelectedMonth, setMonthName)}
           style={{ padding: '5px', fontSize: '14px' }}
         >
           {/* Генерируем опции от 1 до 12 */}

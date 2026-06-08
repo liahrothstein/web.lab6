@@ -1,35 +1,11 @@
 import React, { useState } from 'react';
 
+import { handleCalculate } from '../utils/example8';
+
 export function Example8() {
   // По умолчанию устанавливаем '5'
   const [inputValue, setInputValue] = useState<string>('5');
   const [resultMessage, setResultMessage] = useState<string>('');
-
-  function handleCalculate(): void {
-    const n: number = parseInt(inputValue, 10);
-
-    // Валидация ввода
-    if (isNaN(n)) {
-      setResultMessage('Пожалуйста, введите корректное число.');
-      return;
-    }
-
-    if (n < 0) {
-      setResultMessage('Факториал определен только для неотрицательных целых чисел.');
-      return;
-    }
-
-    // Инициализируем переменную для накопления произведения
-    let factorial: number = 1;
-
-    // Оригинальный цикл for: начинаем с 1 и идем до n включительно
-    for (let i = 1; i <= n; i++) {
-      factorial *= i;
-    }
-
-    // Вывод строки (вместо document.write)
-    setResultMessage(`Факториал ${n}! равен ${factorial}`);
-  }
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '450px' }}>
@@ -52,7 +28,10 @@ export function Example8() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
           style={{ padding: '4px', textAlign: 'center' }}
         />
-        <button onClick={handleCalculate} style={{ padding: '5px 12px', cursor: 'pointer' }}>
+        <button
+          onClick={() => handleCalculate(setResultMessage, inputValue)}
+          style={{ padding: '5px 12px', cursor: 'pointer' }}
+        >
           Вычислить
         </button>
       </div>

@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
 
+import { handleCheckAge, withoutParentheses, withParentheses } from '../utils/example3';
+
 export function Example3() {
-  // 1. Демонстрация сложения без присваивания переменным
-  // В скобках: сначала выполнится сложение (3 + 6 = 9), затем конкатенация строк
-  const withParentheses: string = 'Сложим два числа 3 и 6 без присвоения их переменным: ' + (3 + 6);
-
-  // Без скобок: сработает левоассоциативность, и числа 3 и 6 превратятся в строки "3" и "6"
-  const withoutParentheses: string = 'Без скобок: ' + 3 + 6;
-
-  // 2. Состояние для хранения ответа пользователя из окна confirm
-  // null — пользователь еще не нажал кнопку, boolean — системный ответ true/false
+  /*
+    Состояние для хранения ответа пользователя из окна confirm
+    null — пользователь еще не нажал кнопку, boolean — системный ответ true/false
+  */
   const [isOver18, setIsOver18] = useState<boolean | null>(null);
-
-  // Функция обработки клика по кнопке опроса
-  function handleCheckAge(): void {
-    // Встроенный метод confirm() возвращает true (OK) или false (Отмена)
-    const userChoice: boolean = confirm('Вам больше 18 лет?');
-    setIsOver18(userChoice);
-  }
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', lineHeight: '1.8' }}>
@@ -39,7 +29,10 @@ export function Example3() {
 
       {/* Интерактивная часть с confirm */}
       <div style={{ marginTop: '15px' }}>
-        <button onClick={handleCheckAge} style={{ padding: '8px 16px', cursor: 'pointer' }}>
+        <button
+          onClick={() => handleCheckAge(setIsOver18)}
+          style={{ padding: '8px 16px', cursor: 'pointer' }}
+        >
           Проверить возраст через confirm()
         </button>
       </div>

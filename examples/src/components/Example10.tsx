@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { handleField1Change, handleSubmit } from '../utils/example10';
+
 export function Example10() {
   const [field1, setField1] = useState<string>('');
   const [field2, setField2] = useState<string>('');
@@ -11,17 +13,6 @@ export function Example10() {
     // Для загрузки страницы alert использовать можно, так как он срабатывает один раз
     alert('Добро пожаловать на эту замечательную страницу');
   }, []);
-
-  function handleField1Change(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    setField1(value);
-    setField2(value);
-  }
-
-  function handleSubmit(e: React.SubmitEvent) {
-    e.preventDefault();
-    alert('Нажата кнопка submit. Передача данных формы');
-  }
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
@@ -62,7 +53,7 @@ export function Example10() {
               type="text"
               name="field1"
               value={field1}
-              onChange={handleField1Change}
+              onChange={(e) => handleField1Change(e, setField1, setField2)}
               // Заменяем alert на безопасное обновление состояния
               onFocus={() => setNotification('Выбрано первое поле')}
             />
